@@ -42,5 +42,15 @@ namespace Town_Of_Empire_Helper.Entities
 
             return string.Empty;
         }
+
+        protected void RegisterAct(
+            GameSteps step, 
+            string name, 
+            Func<List<Target>, string> logic, 
+            List<Target> targets)
+        {
+            if (!Acts.ContainsKey(step)) 
+                Acts.Add(step, new Act(logic, name, targets));
+        }
     }
 }

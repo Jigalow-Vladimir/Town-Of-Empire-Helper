@@ -8,7 +8,7 @@ namespace Town_Of_Empire_Helper.Roles
         public Sheriff() 
         {
             RoleConfigurationHandler.Configurate("шериф", this);
-            Acts.Add(GameSteps.Other, new Act(Logic, "проверить", [new()]));
+            RegisterAct(GameSteps.Other, "проверить", Logic, [new()]);
         }
 
         public override string Update(List<Target> targets)

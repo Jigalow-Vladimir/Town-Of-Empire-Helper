@@ -12,8 +12,8 @@ namespace Town_Of_Empire_Helper.Roles
             _tgGuests = [];
 
             RoleConfigurationHandler.Configurate("телохранитель", this);
-            Acts.Add(GameSteps.Baffs, new Act(Logic1, "защитить", [new()]));
-            Acts.Add(GameSteps.Kills, new Act(Logic2, "убить", []));
+            RegisterAct(GameSteps.Baffs, "защитить", Logic1, [new()]);
+            RegisterAct(GameSteps.Baffs, "убить", Logic2, []);
         }
 
         private string Logic1(List<Target> targets)
@@ -22,17 +22,16 @@ namespace Town_Of_Empire_Helper.Roles
 
             if (tg == null) 
                 return string.Empty;
+
             if (tg.Statuses[StatusType.InPrison].IsActivated) 
                 return "цель вне зоны доступа";
 
             _tgGuests = tg.Guests
-                .Where(s => s.Stats["атака"].Get() > 0)
-                .ToList();
-
-            _tgGuests.Remove(this);
+                .Where(s => s.Stats["атака"].Get() > 0 && s != this).ToList();
 
             tg.Statuses[StatusType.Defended]
                 .Activate(this, new GameTime(Time.Day + 1, GameSteps.Update));
+
             tg.Stats["защита"].Add(
                 value: 2, 
                 priority: 1, 
@@ -51,11 +50,13 @@ namespace Town_Of_Empire_Helper.Roles
             foreach (var guest in _tgGuests)
             {
                 if (Stats["атака"].Get() > guest.Stats["защита"].Get())
-                    guest.Statuses[StatusType.Killed].Activate(guest, null);
+                    guest.Statuses[StatusType.Killed]
+                        .Activate(guest, null);
             }
 
             if (Statuses[StatusType.Healed].IsActivated == false)
-                _tgGuests.ForEach(s => Statuses[StatusType.Killed].Activate(s, null));
+                _tgGuests.ForEach(s => Statuses[StatusType.Killed]
+                    .Activate(s, null));
 
             return string.Empty;
         }

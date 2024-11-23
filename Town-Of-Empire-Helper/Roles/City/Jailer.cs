@@ -10,8 +10,8 @@ namespace Town_Of_Empire_Helper.Roles.City
         public Jailer()
         {
             RoleConfigurationHandler.Configurate("тюремщик", this);
-            Acts.Add(GameSteps.Start, new Act(Logic1, "посадить", [new()]));
-            Acts.Add(GameSteps.Kills, new Act(Logic2, "убить", []));
+            RegisterAct(GameSteps.Start, "посадить", Logic1, [new()]);
+            RegisterAct(GameSteps.Kills, "убить", Logic2, []);
         }
 
         public override string Update(List<Target> targets)

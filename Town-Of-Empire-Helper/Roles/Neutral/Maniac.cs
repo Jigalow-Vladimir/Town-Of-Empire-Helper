@@ -8,7 +8,7 @@ namespace Town_Of_Empire_Helper.Roles
         public Maniac() 
         {
             RoleConfigurationHandler.Configurate("маньяк", this);
-            Acts.Add(GameSteps.Kills, new Act(Logic, "убить", [new()]));
+            RegisterAct(GameSteps.Kills, "убить", Logic, [new()]);
         }
 
         public override string Update(List<Target> targets)
