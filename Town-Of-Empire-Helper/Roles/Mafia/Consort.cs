@@ -8,7 +8,7 @@ namespace Town_Of_Empire_Helper.Roles
         public Consort()
         {
             RoleConfigurationHandler.Configurate("консорт", this);
-            Acts.Add(GameSteps.TargetRedefine, new Act(Logic, "трахнуть", [new()]));
+            RegisterAct(GameSteps.TargetRedefine, "трахнуть", Logic, [new()]);
         }
 
         public override string Update(List<Target> targets)
