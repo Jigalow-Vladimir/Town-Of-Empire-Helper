@@ -8,15 +8,15 @@ namespace Town_Of_Empire_Helper.Roles.City
         public Escort()
         {
             RoleConfigurationHandler.Configurate("эскорт", this);
-            RegisterAct(GameSteps.TargetRedefine, "трахнуть", Logic, [new()]);
+            RegisterAct(Steps.TargetRedefine, "трахнуть", Logic, [new()]);
         }
 
         public override string Update(List<Target> targets)
         {
             base.Update(targets);
 
-            Acts[GameSteps.TargetRedefine].IsReady = null;
-            Acts[GameSteps.TargetRedefine].Targets[0].Role = null;
+            Acts[Steps.TargetRedefine].IsReady = null;
+            Acts[Steps.TargetRedefine].Targets[0].Role = null;
 
             return string.Empty;
         }
@@ -27,16 +27,21 @@ namespace Town_Of_Empire_Helper.Roles.City
 
             if (tg == null)
                 return string.Empty;
+
             if (tg.Statuses[StatusType.InPrison].IsActivated ||
                 tg.Name == "эскорт" ||
                 tg.Name == "ведьма" ||
                 tg.Name == "перевозчик" ||
                 tg.Name == "ветеран" ||
                 tg.Name == "консорт")
+            {
                 return "цель вне зоны доступа";
+            }
 
-            tg.Statuses[StatusType.Blocked]
-                .Activate(this, new GameTime(Time.Day + 1, GameSteps.Update));
+            tg.Statuses[StatusType.Blocked].Activate(
+                activator: this, 
+                endTime: new (Time.Day + 1, Steps.Update));
+            
             foreach (var act in tg.Acts)
                 act.Value.IsReady = false;
 
@@ -44,7 +49,9 @@ namespace Town_Of_Empire_Helper.Roles.City
             {
                 Guests.Add(tg);
                 if (tg.Stats["атака"].Get() > Stats["защита"].Get())
-                    Statuses[StatusType.Killed].Activate(tg, null);
+                    Statuses[StatusType.Killed].Activate(
+                        activator: tg, 
+                        endTime: null);
             }
 
             return string.Empty;

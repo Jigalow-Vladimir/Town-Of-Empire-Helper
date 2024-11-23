@@ -12,8 +12,8 @@ namespace Town_Of_Empire_Helper.Roles
             _tgGuests = [];
 
             RoleConfigurationHandler.Configurate("телохранитель", this);
-            RegisterAct(GameSteps.Baffs, "защитить", Logic1, [new()]);
-            RegisterAct(GameSteps.Baffs, "убить", Logic2, []);
+            RegisterAct(Steps.Baffs, "защитить", Logic1, [new()]);
+            RegisterAct(Steps.Baffs, "убить", Logic2, []);
         }
 
         private string Logic1(List<Target> targets)
@@ -27,17 +27,19 @@ namespace Town_Of_Empire_Helper.Roles
                 return "цель вне зоны доступа";
 
             _tgGuests = tg.Guests
-                .Where(s => s.Stats["атака"].Get() > 0 && s != this).ToList();
+                .Where(guest => 
+                    guest.Stats["атака"].Get() > 0 && 
+                    guest != this)
+                .ToList();
 
-            tg.Statuses[StatusType.Defended]
-                .Activate(this, new GameTime(Time.Day + 1, GameSteps.Update));
+            tg.Statuses[StatusType.Defended].Activate(
+                activator: this,
+                endTime: new(Time.Day + 1, Steps.Update));
 
             tg.Stats["защита"].Add(
                 value: 2, 
-                priority: 1, 
-                endTime: new(
-                    day: Time.Day + 1, 
-                    step: GameSteps.Update));
+                priority: Priority.Medium, 
+                endTime: new (Time.Day + 1, Steps.Update));
             
             return string.Empty;
         }
@@ -50,13 +52,16 @@ namespace Town_Of_Empire_Helper.Roles
             foreach (var guest in _tgGuests)
             {
                 if (Stats["атака"].Get() > guest.Stats["защита"].Get())
-                    guest.Statuses[StatusType.Killed]
-                        .Activate(guest, null);
+                    guest.Statuses[StatusType.Killed].Activate(
+                        activator: guest, 
+                        endTime: null);
             }
 
             if (Statuses[StatusType.Healed].IsActivated == false)
-                _tgGuests.ForEach(s => Statuses[StatusType.Killed]
-                    .Activate(s, null));
+                _tgGuests.ForEach(guest => 
+                    Statuses[StatusType.Killed].Activate(
+                        activator: guest, 
+                        endTime: null));
 
             return string.Empty;
         }

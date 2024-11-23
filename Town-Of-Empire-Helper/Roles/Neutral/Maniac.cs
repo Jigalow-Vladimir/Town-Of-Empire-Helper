@@ -8,15 +8,15 @@ namespace Town_Of_Empire_Helper.Roles
         public Maniac() 
         {
             RoleConfigurationHandler.Configurate("маньяк", this);
-            RegisterAct(GameSteps.Kills, "убить", Logic, [new()]);
+            RegisterAct(Steps.Kills, "убить", Logic, [new()]);
         }
 
         public override string Update(List<Target> targets)
         {
             base.Update(targets);
 
-            Acts[GameSteps.Kills].IsReady = null;
-            Acts[GameSteps.Kills].Targets[0].Role = null;
+            Acts[Steps.Kills].IsReady = null;
+            Acts[Steps.Kills].Targets[0].Role = null;
 
             return string.Empty;
         }
@@ -32,7 +32,9 @@ namespace Town_Of_Empire_Helper.Roles
                 return "цель вне зоны доступа";
             
             if (Stats["атака"].Get() > tg.Stats["защита"].Get())
-                tg.Statuses[StatusType.Killed].Activate(this, null);
+                tg.Statuses[StatusType.Killed].Activate(
+                    activator: this, 
+                    endTime: null);
             else return "защита цели слишком высока";
             
             return string.Empty;

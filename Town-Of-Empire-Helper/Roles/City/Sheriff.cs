@@ -8,15 +8,15 @@ namespace Town_Of_Empire_Helper.Roles
         public Sheriff() 
         {
             RoleConfigurationHandler.Configurate("шериф", this);
-            RegisterAct(GameSteps.Other, "проверить", Logic, [new()]);
+            RegisterAct(Steps.Other, "проверить", Logic, [new()]);
         }
 
         public override string Update(List<Target> targets)
         {
             base.Update(targets);
 
-            Acts[GameSteps.Other].IsReady = null;
-            Acts[GameSteps.Other].Targets[0].Role = null;
+            Acts[Steps.Other].IsReady = null;
+            Acts[Steps.Other].Targets[0].Role = null;
 
             return string.Empty;
         }
@@ -24,8 +24,10 @@ namespace Town_Of_Empire_Helper.Roles
         private string Logic(List<Target> targets)
         {
             var tg = targets[0].Role;
+            
             if (tg == null) 
                 return string.Empty;
+
             if (tg.Statuses[StatusType.InPrison].IsActivated)
                 return "цель вне зоны доступа";
 

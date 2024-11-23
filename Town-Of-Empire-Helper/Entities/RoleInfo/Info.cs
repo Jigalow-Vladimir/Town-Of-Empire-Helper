@@ -3,10 +3,10 @@
     public class Info<T>
     {
         public T? Value { get; set; }
-        public int Priority { get; set; }
+        public Priority Priority { get; set; }
         public GameTime? EndTime { get; set; }
 
-        public Info(T? value, int priority, GameTime? endTime) =>
+        public Info(T? value, Priority priority, GameTime? endTime) =>
             (Value, Priority, EndTime) = (value, priority, endTime);
     }
 }

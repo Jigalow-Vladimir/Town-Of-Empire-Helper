@@ -3,9 +3,9 @@
     public class GameTime
     {
         public int Day { get; set; }
-        public GameSteps Step { get; set; }
+        public Steps Step { get; set; }
 
-        public GameTime(int day, GameSteps step) => 
+        public GameTime(int day, Steps step) => 
             (Day, Step) = (day, step);
 
         public override bool Equals(object? obj)

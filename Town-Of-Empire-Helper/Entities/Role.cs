@@ -11,7 +11,7 @@ namespace Town_Of_Empire_Helper.Entities
         public Dictionary<string, Stat<int>> Stats { get; set; }
         public Dictionary<StatusType, Status> Statuses { get; set; }
         public Dictionary<string, Stat<string>> OtherStats { get; set; }
-        public Dictionary<GameSteps, Act> Acts { get; set; } 
+        public Dictionary<Steps, Act> Acts { get; set; } 
         
         public Role()
         {
@@ -24,7 +24,7 @@ namespace Town_Of_Empire_Helper.Entities
             Statuses = [];
             Acts = [];
 
-            Acts.Add(GameSteps.Update, new Act(Update, string.Empty, []));
+            Acts.Add(Steps.Update, new Act(Update, string.Empty, []));
         }
 
         public virtual string Update(List<Target> targets)
@@ -44,7 +44,7 @@ namespace Town_Of_Empire_Helper.Entities
         }
 
         protected void RegisterAct(
-            GameSteps step, 
+            Steps step, 
             string name, 
             Func<List<Target>, string> logic, 
             List<Target> targets)

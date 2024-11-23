@@ -16,11 +16,11 @@ namespace Town_Of_Empire_Helper
             var escort = new Escort();
             var consort = new Consort();
 
-            sheriff.Acts[GameSteps.Other].Targets[0].Role = null;
-            bodyguard.Acts[GameSteps.Baffs].Targets[0].Role = null;
-            maniac.Acts[GameSteps.Kills].Targets[0].Role = null;
-            escort.Acts[GameSteps.TargetRedefine].Targets[0].Role = maniac;
-            consort.Acts[GameSteps.TargetRedefine].Targets[0].Role = maniac;
+            sheriff.Acts[Steps.Other].Targets[0].Role = null;
+            bodyguard.Acts[Steps.Baffs].Targets[0].Role = null;
+            maniac.Acts[Steps.Kills].Targets[0].Role = null;
+            escort.Acts[Steps.TargetRedefine].Targets[0].Role = maniac;
+            consort.Acts[Steps.TargetRedefine].Targets[0].Role = maniac;
 
             List<Role> roles = [sheriff, maniac, bodyguard, escort, consort];
             foreach (var role in roles)

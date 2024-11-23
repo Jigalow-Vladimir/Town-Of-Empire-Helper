@@ -10,11 +10,11 @@
         public Status(StatusType type) =>
             (Type, IsActivated, IsActivatedBy) = (type, false, []);
 
-        public void Activate(Role activator, GameTime? deactivateTime)
+        public void Activate(Role activator, GameTime? endTime)
         {
             IsActivated = true;
             IsActivatedBy.Add(activator);
-            DeactivateTime = deactivateTime;
+            DeactivateTime = endTime;
         }
 
         public void Update(GameTime gameTime)

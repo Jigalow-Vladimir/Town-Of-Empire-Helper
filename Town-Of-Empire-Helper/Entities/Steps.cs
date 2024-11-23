@@ -1,6 +1,6 @@
 ﻿namespace Town_Of_Empire_Helper.Entities
 {
-    public enum GameSteps
+    public enum Steps
     {
         Update,
         TargetDefine,

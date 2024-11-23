@@ -10,7 +10,7 @@
 
         public void Act()
         {
-            foreach (GameSteps step in Enum.GetValues(typeof(GameSteps)))
+            foreach (Steps step in Enum.GetValues(typeof(Steps)))
             {
                 foreach (var role in Roles)
                     if (role.Acts.ContainsKey(step) && role.Acts[step].IsReady != false)

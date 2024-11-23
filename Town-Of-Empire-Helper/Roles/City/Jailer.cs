@@ -10,18 +10,18 @@ namespace Town_Of_Empire_Helper.Roles.City
         public Jailer()
         {
             RoleConfigurationHandler.Configurate("тюремщик", this);
-            RegisterAct(GameSteps.Start, "посадить", Logic1, [new()]);
-            RegisterAct(GameSteps.Kills, "убить", Logic2, []);
+            RegisterAct(Steps.Start, "посадить", Logic1, [new()]);
+            RegisterAct(Steps.Kills, "убить", Logic2, []);
         }
 
         public override string Update(List<Target> targets)
         {
             base.Update(targets);
 
-            Acts[GameSteps.Start].IsReady = null;
-            Acts[GameSteps.Start].Targets[0].Role = null;
+            Acts[Steps.Start].IsReady = null;
+            Acts[Steps.Start].Targets[0].Role = null;
 
-            Acts[GameSteps.Kills].IsReady = false;
+            Acts[Steps.Kills].IsReady = false;
 
             return string.Empty;
         }
@@ -33,9 +33,10 @@ namespace Town_Of_Empire_Helper.Roles.City
             if (tg == null)
                 return string.Empty;
 
-            tg.Statuses[StatusType.InPrison]
-                .Activate(this, new GameTime(Time.Day + 1, GameSteps.Update));
             _prisoner = tg;
+            tg.Statuses[StatusType.InPrison].Activate(
+                activator: this, 
+                endTime: new (Time.Day + 1, Steps.Update));
 
             return string.Empty;
         }
