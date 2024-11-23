@@ -1,4 +1,4 @@
-﻿namespace Town_Of_Empire.Entities.RoleInfo
+﻿namespace Town_Of_Empire_Helper.Entities.RoleInfo
 {
     public class User
     {

@@ -1,8 +1,8 @@
-﻿using Town_Of_Empire.Entities;
-using Town_Of_Empire.Entities.RoleInfo;
+﻿using Town_Of_Empire_Helper.Entities;
+using Town_Of_Empire_Helper.Entities.RoleInfo;
 using System.Text.Json;
 
-namespace Town_Of_Empire
+namespace Town_Of_Empire_Helper
 {
     public static class RoleConfigurationHandler
     {

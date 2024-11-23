@@ -1,10 +1,10 @@
-﻿using Town_Of_Empire.Entities;
-using Town_Of_Empire.Roles;
-using Town_Of_Empire.Roles.City;
+﻿using Town_Of_Empire_Helper.Entities;
+using Town_Of_Empire_Helper.Roles;
+using Town_Of_Empire_Helper.Roles.City;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 
-namespace Town_Of_Empire
+namespace Town_Of_Empire_Helper
 {
     public class Program
     {

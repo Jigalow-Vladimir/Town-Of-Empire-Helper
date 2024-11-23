@@ -1,7 +1,7 @@
-﻿using Town_Of_Empire.Entities;
-using Town_Of_Empire.Entities.RoleInfo;
+﻿using Town_Of_Empire_Helper.Entities;
+using Town_Of_Empire_Helper.Entities.RoleInfo;
 
-namespace Town_Of_Empire.Roles
+namespace Town_Of_Empire_Helper.Roles
 {
     public class Consort : Role
     {
