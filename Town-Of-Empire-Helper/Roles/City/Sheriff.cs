@@ -11,13 +11,14 @@ namespace Town_Of_Empire.Roles
             Acts.Add(GameSteps.Other, new Act(Logic, "проверить", [new()]));
         }
 
-
-        public override void Update(GameTime time)
+        public override string Update(List<Target> targets)
         {
-            base.Update(time);
+            base.Update(targets);
 
             Acts[GameSteps.Other].IsReady = null;
             Acts[GameSteps.Other].Targets[0].Role = null;
+
+            return string.Empty;
         }
 
         private string Logic(List<Target> targets)
