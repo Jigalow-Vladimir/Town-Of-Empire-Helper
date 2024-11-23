@@ -15,5 +15,8 @@
                 return false;
             return ((time.Day == Day) && (time.Step == Step));
         }
+
+        public static GameTime UpdateTime(GameTime now) =>
+            new GameTime(now.Day + 1, Steps.Update);
     }
 }

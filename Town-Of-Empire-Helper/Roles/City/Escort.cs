@@ -5,6 +5,10 @@ namespace Town_Of_Empire_Helper.Roles.City
 {
     public class Escort : Role
     {
+        private static List<string> _untouchables =  
+           ["эскорт", "ведьма", "перевозчик", "ветеран", 
+            "консорт", "тюремщик"];
+
         public Escort()
         {
             RoleConfigurationHandler.Configurate("эскорт", this);
@@ -29,18 +33,11 @@ namespace Town_Of_Empire_Helper.Roles.City
                 return string.Empty;
 
             if (tg.Statuses[StatusType.InPrison].IsActivated ||
-                tg.Name == "эскорт" ||
-                tg.Name == "ведьма" ||
-                tg.Name == "перевозчик" ||
-                tg.Name == "ветеран" ||
-                tg.Name == "консорт")
-            {
+                _untouchables.Contains(tg.Name))
                 return "цель вне зоны доступа";
-            }
-
-            tg.Statuses[StatusType.Blocked].Activate(
-                activator: this, 
-                endTime: new (Time.Day + 1, Steps.Update));
+            
+            tg.Statuses[StatusType.Blocked]
+                .Activate(this, GameTime.UpdateTime(Time));
             
             foreach (var act in tg.Acts)
                 act.Value.IsReady = false;
@@ -49,9 +46,7 @@ namespace Town_Of_Empire_Helper.Roles.City
             {
                 Guests.Add(tg);
                 if (tg.Stats["атака"].Get() > Stats["защита"].Get())
-                    Statuses[StatusType.Killed].Activate(
-                        activator: tg, 
-                        endTime: null);
+                    Statuses[StatusType.Killed].Activate(tg, null);
             }
 
             return string.Empty;

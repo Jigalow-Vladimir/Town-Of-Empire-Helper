@@ -32,9 +32,8 @@ namespace Town_Of_Empire_Helper.Roles
                 return "цель вне зоны доступа";
             
             if (Stats["атака"].Get() > tg.Stats["защита"].Get())
-                tg.Statuses[StatusType.Killed].Activate(
-                    activator: this, 
-                    endTime: null);
+                tg.Statuses[StatusType.Killed]
+                    .Activate(this, null);
             else return "защита цели слишком высока";
             
             return string.Empty;

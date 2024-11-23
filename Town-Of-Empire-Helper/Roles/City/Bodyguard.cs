@@ -26,20 +26,14 @@ namespace Town_Of_Empire_Helper.Roles
             if (tg.Statuses[StatusType.InPrison].IsActivated) 
                 return "цель вне зоны доступа";
 
-            _tgGuests = tg.Guests
-                .Where(guest => 
-                    guest.Stats["атака"].Get() > 0 && 
-                    guest != this)
-                .ToList();
+            _tgGuests = tg.Guests.Where(g => g.Stats["атака"]
+                .Get() > 0 && g != this).ToList();
 
-            tg.Statuses[StatusType.Defended].Activate(
-                activator: this,
-                endTime: new(Time.Day + 1, Steps.Update));
+            tg.Statuses[StatusType.Defended]
+                .Activate(this, GameTime.UpdateTime(Time));
 
-            tg.Stats["защита"].Add(
-                value: 2, 
-                priority: Priority.Medium, 
-                endTime: new (Time.Day + 1, Steps.Update));
+            tg.Stats["защита"]
+                .Add(2, Priority.Medium, GameTime.UpdateTime(Time));
             
             return string.Empty;
         }
@@ -49,19 +43,12 @@ namespace Town_Of_Empire_Helper.Roles
             if (_tgGuests.Count == 0) 
                 return string.Empty;
 
-            foreach (var guest in _tgGuests)
-            {
-                if (Stats["атака"].Get() > guest.Stats["защита"].Get())
-                    guest.Statuses[StatusType.Killed].Activate(
-                        activator: guest, 
-                        endTime: null);
-            }
+            foreach (var g in _tgGuests.Where(g => Stats["атака"].Get() > 
+                g.Stats["защита"].Get()))
+                g.Statuses[StatusType.Killed].Activate(g, null);
 
             if (Statuses[StatusType.Healed].IsActivated == false)
-                _tgGuests.ForEach(guest => 
-                    Statuses[StatusType.Killed].Activate(
-                        activator: guest, 
-                        endTime: null));
+                _tgGuests.ForEach(g => Statuses[StatusType.Killed].Activate(g, null));
 
             return string.Empty;
         }

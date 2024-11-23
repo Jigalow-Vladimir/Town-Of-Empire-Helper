@@ -28,15 +28,12 @@ namespace Town_Of_Empire_Helper.Roles.City
 
         private string Logic1(List<Target> targets)
         {
-            var tg = targets[0].Role;
+            _prisoner = targets[0].Role;
 
-            if (tg == null)
-                return string.Empty;
+            if (_prisoner == null) return string.Empty;
 
-            _prisoner = tg;
-            tg.Statuses[StatusType.InPrison].Activate(
-                activator: this, 
-                endTime: new (Time.Day + 1, Steps.Update));
+            _prisoner.Statuses[StatusType.InPrison]
+                .Activate(this, GameTime.UpdateTime(Time));
 
             return string.Empty;
         }
