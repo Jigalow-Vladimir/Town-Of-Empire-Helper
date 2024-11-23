@@ -13,7 +13,7 @@ namespace Town_Of_Empire_Helper.Roles
 
             RoleConfigurationHandler.Configurate("телохранитель", this);
             RegisterAct(Steps.Baffs, "защитить", Logic1, [new()]);
-            RegisterAct(Steps.Baffs, "убить", Logic2, []);
+            RegisterAct(Steps.Kills, "убить", Logic2, []);
         }
 
         private string Logic1(List<Target> targets)
