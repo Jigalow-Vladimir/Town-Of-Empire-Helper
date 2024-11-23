@@ -1,4 +1,6 @@
-﻿namespace Town_Of_Empire_Helper.Entities
+﻿using System.Data;
+
+namespace Town_Of_Empire_Helper.Entities
 {
     public class Game
     {
@@ -12,9 +14,9 @@
         {
             foreach (Steps step in Enum.GetValues(typeof(Steps)))
             {
-                foreach (var role in Roles)
-                    if (role.Acts.ContainsKey(step) && role.Acts[step].IsReady != false)
-                        role.Acts[step].Invoke();
+                Roles.Where(r => r.Acts.ContainsKey(step) && 
+                    r.Acts[step].IsReady != false)
+                    .ToList().ForEach(r => r.Acts[step].Invoke());
             }
         }
     }
