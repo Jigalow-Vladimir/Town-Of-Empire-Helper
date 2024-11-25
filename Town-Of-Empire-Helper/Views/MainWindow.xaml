@@ -13,6 +13,10 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label FontFamily="Comic Sans MS" Content="Текущий день: "/>
+                <Label FontFamily="Comic Sans MS" Content="{Binding CurrentDay}"/>
+            </StackPanel>
             <Button FontFamily="Comic Sans MS" Command="{Binding UpdateRolesCommand}" Content="Update"/>
             <ItemsControl ItemsSource="{Binding Players}">
                 <ItemsControl.ItemTemplate>

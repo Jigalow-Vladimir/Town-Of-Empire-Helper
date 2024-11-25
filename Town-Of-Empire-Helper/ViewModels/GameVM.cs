@@ -39,6 +39,7 @@ namespace Town_Of_Empire_Helper.ViewModels
 
         private void UpdateRoles(object? parameter)
         {
+            OnPropertyChanged(nameof(CurrentDay));
             _game.Update();
             foreach (var player in Players)
                 player.UpdateAll();

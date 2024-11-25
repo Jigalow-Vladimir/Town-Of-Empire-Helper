@@ -10,8 +10,11 @@ namespace Town_Of_Empire_Helper.Entities
         public Game() =>
             Roles = [];
 
-        public void Update() =>
+        public void Update()
+        {
             Roles.ForEach(role => role.Update());
+            CurrentDay++;
+        }
 
         public void Act()
         {
