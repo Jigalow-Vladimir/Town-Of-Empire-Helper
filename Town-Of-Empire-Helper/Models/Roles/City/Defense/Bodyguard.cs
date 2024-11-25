@@ -53,7 +53,7 @@ namespace Town_Of_Empire_Helper.Roles
 
         private string Logic2(List<Target> targets)
         {
-            if (_tgGuests.Count == 0) 
+            if (_tgGuests == null || _tgGuests.Count == 0) 
                 return string.Empty;
 
             foreach (var g in _tgGuests.Where(g => Stats["атака"].Get() > 
