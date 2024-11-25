@@ -6,7 +6,7 @@ namespace Town_Of_Empire_Helper.Roles
 {
     public class Bodyguard : Role
     {
-        private List<Role> _tgGuests;
+        private List<Role>? _tgGuests;
 
         public Bodyguard()
         {
@@ -15,6 +15,18 @@ namespace Town_Of_Empire_Helper.Roles
             RoleConfigurationHandler.Configurate("телохранитель", this);
             RegisterAct(Steps.Baffs, "защитить", Logic1, [new()]);
             RegisterAct(Steps.Kills, "убить", Logic2, []);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            _tgGuests = null;
+
+            Acts[Steps.Baffs].IsReady = null;
+            Acts[Steps.Baffs].Targets[0].Role = null;
+
+            Acts[Steps.Baffs].IsReady = null;
         }
 
         private string Logic1(List<Target> targets)
