@@ -16,9 +16,9 @@ namespace Town_Of_Empire_Helper.Roles
             RegisterAct(Steps.End, "исход", Logic3, []);
         }
 
-        public override string Update(List<Target> targets)
+        public override void Update()
         {
-            base.Update(targets);
+            base.Update();
 
             _prisoner = null;
 
@@ -26,8 +26,6 @@ namespace Town_Of_Empire_Helper.Roles
             Acts[Steps.Start].Targets[0].Role = null;
             Acts[Steps.Kills].IsReady = false;
             Acts[Steps.End].IsReady = null;
-
-            return string.Empty;
         }
 
         private string Logic1(List<Target> targets)
@@ -37,7 +35,7 @@ namespace Town_Of_Empire_Helper.Roles
             if (_prisoner == null) return string.Empty;
 
             _prisoner.Statuses[StatusType.InPrison]
-                .Activate(this, GameTime.UpdateTime(Time));
+                .Activate(this, new GameTime(Time.Day + 1, Steps.Start));
 
             return string.Empty;
         }

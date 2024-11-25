@@ -1,6 +1,8 @@
 ﻿using Town_Of_Empire_Helper.Entities.RoleInfo;
 using Town_Of_Empire_Helper.Entities;
 using System.Collections.ObjectModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.ComponentModel;
 
 namespace Town_Of_Empire_Helper.ViewModels.ActVMs
 {
@@ -13,6 +15,14 @@ namespace Town_Of_Empire_Helper.ViewModels.ActVMs
         {
             Targets = [];
             act.Targets.ForEach(target => Targets.Add(new(game, target)));
+        }
+
+        public override void UpdateAll()
+        {
+            base.UpdateAll();
+            OnPropertyChanged(nameof(Targets));
+            foreach (var target in Targets)
+                target.UpdateAll();
         }
     }
 }

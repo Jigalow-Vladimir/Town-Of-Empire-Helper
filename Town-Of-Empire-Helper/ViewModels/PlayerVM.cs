@@ -1,15 +1,17 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Town_Of_Empire_Helper.Entities;
 using Town_Of_Empire_Helper.ViewModels.ActVMs;
 
 namespace Town_Of_Empire_Helper.ViewModels
 {
-    public class PlayerVM
+    public class PlayerVM : INotifyPropertyChanged
     {
         private Game _game;
         private Role _role;
         private ObservableCollection<TargetlessActVM> targetlessActs = [];
         private ObservableCollection<TargetOrientedActVM> targetOrientedActs = [];
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public ObservableCollection<TargetOrientedActVM> TargetOrientedActs
         {
@@ -59,6 +61,22 @@ namespace Town_Of_Empire_Helper.ViewModels
             {
                 targetlessActs.Add(new(_game, act.Value));
             }
+        }
+
+        public void UpdateAll()
+        {
+            foreach (var act in TargetlessActs)
+                act.UpdateAll();
+            foreach (var act in TargetOrientedActs)
+                act.UpdateAll();
+
+            OnPropertyChanged(nameof(Nickname));
+            OnPropertyChanged(nameof(Role));
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -31,10 +31,10 @@ namespace Town_Of_Empire_Helper.Roles
                 .Get() > 0 && g != this).ToList();
 
             tg.Statuses[StatusType.Defended]
-                .Activate(this, GameTime.UpdateTime(Time));
+                .Activate(this, new GameTime(Time.Day + 1, Steps.Start));
 
             tg.Stats["защита"]
-                .Add(2, Priority.Medium, GameTime.UpdateTime(Time));
+                .Add(2, Priority.Medium, new GameTime(Time.Day + 1, Steps.Start));
             
             return string.Empty;
         }

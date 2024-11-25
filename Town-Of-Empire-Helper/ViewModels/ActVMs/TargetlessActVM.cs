@@ -14,5 +14,11 @@ namespace Town_Of_Empire_Helper.ViewModels.ActVMs
         public TargetlessActVM(Game game, Act act) :
             base(game, act)
         { }
+
+        public override void UpdateAll()
+        {
+            base.UpdateAll();
+            OnPropertyChanged(nameof(IsReady));
+        }
     }
 }

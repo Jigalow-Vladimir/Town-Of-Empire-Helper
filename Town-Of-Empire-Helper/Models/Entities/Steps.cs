@@ -2,8 +2,6 @@
 {
     public enum Steps
     {
-        Update,
-        TargetDefine,
         Start,
         TargetRedefine,
         Baffs,

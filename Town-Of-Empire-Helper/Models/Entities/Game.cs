@@ -10,6 +10,9 @@ namespace Town_Of_Empire_Helper.Entities
         public Game() =>
             Roles = [];
 
+        public void Update() =>
+            Roles.ForEach(role => role.Update());
+
         public void Act()
         {
             foreach (Steps step in Enum.GetValues(typeof(Steps)))

@@ -23,11 +23,9 @@ namespace Town_Of_Empire_Helper.Entities
             OtherStats = [];
             Statuses = [];
             Acts = [];
-
-            Acts.Add(Steps.Update, new Act(Update, string.Empty, []));
         }
 
-        public virtual string Update(List<Target> targets)
+        public virtual void Update()
         {
             Time.Day++;
 
@@ -39,8 +37,6 @@ namespace Town_Of_Empire_Helper.Entities
                 status.Value.Update(Time);
             foreach (var act in Acts)
                 act.Value.Update();
-
-            return string.Empty;
         }
 
         protected void RegisterAct(

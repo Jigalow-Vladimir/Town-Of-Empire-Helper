@@ -16,14 +16,12 @@ namespace Town_Of_Empire_Helper.Roles.City
             RegisterAct(Steps.TargetRedefine, "трахнуть", Logic, [new()]);
         }
 
-        public override string Update(List<Target> targets)
+        public override void Update()
         {
-            base.Update(targets);
+            base.Update();
 
             Acts[Steps.TargetRedefine].IsReady = null;
             Acts[Steps.TargetRedefine].Targets[0].Role = null;
-
-            return string.Empty;
         }
 
         private string Logic(List<Target> targets)
@@ -38,7 +36,7 @@ namespace Town_Of_Empire_Helper.Roles.City
                 return "цель вне зоны доступа";
             
             tg.Statuses[StatusType.Blocked]
-                .Activate(this, GameTime.UpdateTime(Time));
+                .Activate(this, new GameTime(Time.Day + 1, Steps.Start));
             
             foreach (var act in tg.Acts)
                 act.Value.IsReady = false;
