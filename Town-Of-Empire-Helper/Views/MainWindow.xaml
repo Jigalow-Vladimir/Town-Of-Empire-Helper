@@ -5,8 +5,77 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Town_Of_Empire_Helper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Top="0" Left="0"
+        Title="MainWindow" Height="700" Width="720">
+    <Grid x:Name="mainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <ItemsControl ItemsSource="{Binding Players}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
+                        <Border Background="Brown"/>
+                        <StackPanel Grid.Column="1">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Height="20" Padding="2,0" Content="{Binding Number}"/>
+                                <Label Height="20" Padding="2,0" Content="{Binding Username}"/>
+                                <Label Height="20" Padding="2,0" Content="{Binding Role}"/>
+                            </StackPanel>
+
+                            <ItemsControl ItemsSource="{Binding TargetOrientedActs}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Label Height="20" Padding="2,0" Content="{Binding Name}"/>
+                                            <ItemsControl ItemsSource="{Binding Targets}" Margin="2">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel
+                                                            Margin="8,0,0,0"
+                                                            Orientation="Horizontal">
+                                                            <Label Padding="2,0" Content="{Binding Name}"/>
+                                                            <TextBox 
+                                                                Padding="2,0"
+                                                                Width="20"
+                                                                HorizontalAlignment="Center" 
+                                                                VerticalAlignment="Center"
+                                                                Text="{Binding Number}"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <ItemsControl ItemsSource="{Binding TargetlessActs}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel 
+                                            Orientation="Horizontal" 
+                                            Margin="0">
+                                            <Label Content="{Binding Name}"/>
+                                            <CheckBox 
+                                                IsChecked="{Binding IsReady}"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Window>

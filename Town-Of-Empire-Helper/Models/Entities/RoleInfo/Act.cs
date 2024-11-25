@@ -11,13 +11,14 @@
         public Act(
             Func<List<Target>, string> logic, 
             string name, 
-            List<Target> targets)
+            List<Target> targets,
+            bool? isReady = null)
         {
             Logic = logic;
             Name = name;
             Targets = targets;
-            IsReady = false;
             Result = string.Empty;
+            IsReady = isReady;
         }
 
         public void Invoke() =>

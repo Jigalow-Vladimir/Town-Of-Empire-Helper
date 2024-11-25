@@ -3,7 +3,7 @@ using Town_Of_Empire_Helper.Entities.RoleInfo;
 using System.Text.Json;
 using System.IO;
 
-namespace Town_Of_Empire_Helper
+namespace Town_Of_Empire_Helper.Models
 {
     public static class RoleConfigurationHandler
     {
@@ -49,14 +49,14 @@ namespace Town_Of_Empire_Helper
         static void LoadStatuses(string filePath, Dictionary<StatusType, string> statuses)
         {
             if (!File.Exists(filePath)) return;
-            
+
             try
             {
                 string json = File.ReadAllText(filePath);
                 var data = JsonSerializer
                     .Deserialize<Dictionary<StatusType, string>>(json);
 
-                if (data != null) 
+                if (data != null)
                     foreach (var item in data)
                     {
                         statuses.Add(item.Key, item.Value);

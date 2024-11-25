@@ -47,10 +47,11 @@ namespace Town_Of_Empire_Helper.Entities
             Steps step, 
             string name, 
             Func<List<Target>, string> logic, 
-            List<Target> targets)
+            List<Target> targets,
+            bool? isReady = null)
         {
             if (!Acts.ContainsKey(step)) 
-                Acts.Add(step, new Act(logic, name, targets));
+                Acts.Add(step, new Act(logic, name, targets, isReady));
         }
     }
 }
