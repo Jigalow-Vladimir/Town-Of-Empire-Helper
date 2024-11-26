@@ -11,19 +11,17 @@ namespace Town_Of_Empire_Helper.ViewModels
         private Role _role;
         private ObservableCollection<TargetlessActVM> targetlessActs = [];
         private ObservableCollection<TargetOrientedActVM> targetOrientedActs = [];
+        private ObservableCollection<OneTargetOrientedActVM> oneTargetOrientedActs = [];
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public ObservableCollection<TargetOrientedActVM> TargetOrientedActs
-        {
-            get { return targetOrientedActs; }
-            set { targetOrientedActs = value; }
-        }
+        public ObservableCollection<TargetOrientedActVM> TargetOrientedActs => 
+            targetOrientedActs;
 
-        public ObservableCollection<TargetlessActVM> TargetlessActs
-        {
-            get { return targetlessActs; }
-            set { targetlessActs = value; }
-        }
+        public ObservableCollection<TargetlessActVM> TargetlessActs => 
+            targetlessActs;
+
+        public ObservableCollection<OneTargetOrientedActVM> OneTargetOrientedActs =>
+            oneTargetOrientedActs;
 
         public string Number =>
             _role.User.Number.ToString("00");
@@ -42,12 +40,14 @@ namespace Town_Of_Empire_Helper.ViewModels
             (_game, _role) = (game, role);
             SetTargetOrientedActs();
             SetTargetlessActs();
+            SetOneTargetOrientedActs();
         }
 
         private void SetTargetOrientedActs()
         {
             foreach (var act in _role.Acts
-                .Where(act => act.Value.Targets.Count > 0 && act.Value.IsReady == null))
+                .Where(act => act.Value.Targets.Count > 1 && 
+                act.Value.IsReady == null))
             {
                 targetOrientedActs.Add(new (_game, act.Value));
             };
@@ -60,6 +60,16 @@ namespace Town_Of_Empire_Helper.ViewModels
                     act.Value.IsReady != null))
             {
                 targetlessActs.Add(new(_game, act.Value));
+            }
+        }
+
+        private void SetOneTargetOrientedActs()
+        {
+            foreach (var act in _role.Acts
+                .Where(act => act.Value.Targets.Count == 1 && 
+                act.Value.IsReady == null))
+            {
+                oneTargetOrientedActs.Add(new(_game, act.Value));
             }
         }
 
