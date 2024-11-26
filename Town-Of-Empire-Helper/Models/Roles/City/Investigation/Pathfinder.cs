@@ -1,7 +1,8 @@
 ﻿using Town_Of_Empire_Helper.Entities;
 using Town_Of_Empire_Helper.Entities.RoleInfo;
+using Town_Of_Empire_Helper.Models;
 
-namespace Town_Of_Empire_Helper.Models.Roles.City.Investigation
+namespace Town_Of_Empire_Helper.Roles
 {
     public class Pathfinder : Role
     {

@@ -12,73 +12,78 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
+        <TextBox IsReadOnly="True" Grid.Column="1" Text="{Binding AllMessages, Mode=OneWay}"/>
+
         <StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label FontFamily="Comic Sans MS" Content="Текущий день: "/>
                 <Label FontFamily="Comic Sans MS" Content="{Binding CurrentDay}"/>
             </StackPanel>
-            <Button FontFamily="Comic Sans MS" Command="{Binding UpdateRolesCommand}" Content="Update"/>
+            <Button FontFamily="Comic Sans MS" Command="{Binding NextStepCommand}" Content="Update"/>
             <ItemsControl ItemsSource="{Binding Players}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                        <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                            
+                                <Border Background="Brown"/>
+                                <StackPanel Grid.Column="1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Height="20" Padding="2,0" Content="{Binding Number}"/>
+                                        <Label Height="20" Padding="2,0" Content="{Binding Nickname}"/>
+                                        <Label Height="20" Padding="2,0" Content="{Binding Role}"/>
+                                    </StackPanel>
 
-                            <Border Background="Brown"/>
-                            <StackPanel Grid.Column="1">
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Height="20" Padding="2,0" Content="{Binding Number}"/>
-                                    <Label Height="20" Padding="2,0" Content="{Binding Username}"/>
-                                    <Label Height="20" Padding="2,0" Content="{Binding Role}"/>
+                                    <ItemsControl ItemsSource="{Binding TargetOrientedActs}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <Label Height="20" Padding="2,0" Content="{Binding Name}"/>
+                                                    <ItemsControl ItemsSource="{Binding Targets}" Margin="2">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel
+                                                        Margin="8,0,0,0"
+                                                        Orientation="Horizontal">
+                                                                    <Label Padding="2,0" Content="{Binding Name}"/>
+                                                                    <TextBox 
+                                                            Padding="2,0"
+                                                            Width="20"
+                                                            HorizontalAlignment="Center" 
+                                                            VerticalAlignment="Center"
+                                                            Text="{Binding Number}"/>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <ItemsControl ItemsSource="{Binding TargetlessActs}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel 
+                                        Orientation="Horizontal" 
+                                        Margin="0">
+                                                    <Label Content="{Binding Name}"/>
+                                                    <CheckBox 
+                                            IsChecked="{Binding IsReady, Mode=TwoWay}"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
                                 </StackPanel>
-
-                                <ItemsControl ItemsSource="{Binding TargetOrientedActs}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel>
-                                                <Label Height="20" Padding="2,0" Content="{Binding Name}"/>
-                                                <ItemsControl ItemsSource="{Binding Targets}" Margin="2">
-                                                    <ItemsControl.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <StackPanel
-                                                    Margin="8,0,0,0"
-                                                    Orientation="Horizontal">
-                                                                <Label Padding="2,0" Content="{Binding Name}"/>
-                                                                <TextBox 
-                                                        Padding="2,0"
-                                                        Width="20"
-                                                        HorizontalAlignment="Center" 
-                                                        VerticalAlignment="Center"
-                                                        Text="{Binding Number}"/>
-                                                            </StackPanel>
-                                                        </DataTemplate>
-                                                    </ItemsControl.ItemTemplate>
-                                                </ItemsControl>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-
-                                <ItemsControl ItemsSource="{Binding TargetlessActs}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel 
-                                    Orientation="Horizontal" 
-                                    Margin="0">
-                                                <Label Content="{Binding Name}"/>
-                                                <CheckBox 
-                                        IsChecked="{Binding IsReady, Mode=TwoWay}"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </StackPanel>
-                        </Grid>
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

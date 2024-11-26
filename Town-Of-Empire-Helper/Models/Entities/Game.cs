@@ -20,9 +20,12 @@ namespace Town_Of_Empire_Helper.Entities
         {
             foreach (Steps step in Enum.GetValues(typeof(Steps)))
             {
-                Roles.Where(r => r.Acts.ContainsKey(step) && 
-                    r.Acts[step].IsReady != false)
-                    .ToList().ForEach(r => r.Acts[step].Invoke());
+                foreach (var role in Roles
+                    .Where(r => r.Acts
+                    .ContainsKey(step) && r.Acts[step].IsReady != false))
+                {
+                    role.Acts[step].Invoke();
+                }
             }
         }
     }

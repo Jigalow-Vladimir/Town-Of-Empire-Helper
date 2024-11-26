@@ -36,9 +36,7 @@ namespace Town_Of_Empire_Helper.ViewModels.ActVMs
             OnPropertyChanged(nameof(Number));
         }
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));        
     }
 }

@@ -13,15 +13,11 @@ namespace Town_Of_Empire_Helper.ViewModels.Commands
             _canExecute = canExecute;
         }
 
-        public bool CanExecute(object? parameter)
-        {
-            return _canExecute?.Invoke(parameter) ?? true;
-        }
+        public bool CanExecute(object? parameter) =>
+            _canExecute?.Invoke(parameter) ?? true;
 
-        public void Execute(object? parameter)
-        {
+        public void Execute(object? parameter) =>
             _execute(parameter);
-        }
 
         public event EventHandler? CanExecuteChanged
         {

@@ -2,7 +2,7 @@
 using Town_Of_Empire_Helper.Entities.RoleInfo;
 using Town_Of_Empire_Helper.Models;
 
-namespace Town_Of_Empire_Helper.Roles.City
+namespace Town_Of_Empire_Helper.Roles
 {
     public class Escort : Role
     {

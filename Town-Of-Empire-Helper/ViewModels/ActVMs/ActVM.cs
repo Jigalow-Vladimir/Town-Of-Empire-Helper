@@ -21,9 +21,7 @@ namespace Town_Of_Empire_Helper.ViewModels.ActVMs
             OnPropertyChanged(nameof(Name));
         }
 
-        protected void OnPropertyChanged(string propertyName)
-        {
+        protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

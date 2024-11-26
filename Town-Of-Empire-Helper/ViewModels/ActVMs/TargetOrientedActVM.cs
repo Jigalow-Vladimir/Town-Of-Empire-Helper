@@ -1,8 +1,6 @@
 ﻿using Town_Of_Empire_Helper.Entities.RoleInfo;
 using Town_Of_Empire_Helper.Entities;
 using System.Collections.ObjectModel;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.ComponentModel;
 
 namespace Town_Of_Empire_Helper.ViewModels.ActVMs
 {

@@ -22,8 +22,7 @@
         }
 
         public void Invoke() =>
-            Result = IsReady == true ?
-                Logic?.Invoke(Targets) ?? "" : "";
+            Result = Logic?.Invoke(Targets) ?? string.Empty;
 
         public void Update() => 
             Result = string.Empty;
