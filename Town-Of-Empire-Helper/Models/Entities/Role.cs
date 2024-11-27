@@ -1,6 +1,6 @@
-﻿using Town_Of_Empire_Helper.Entities.RoleInfo;
+﻿using Town_Of_Empire_Helper.Models.Entities.RoleInfo;
 
-namespace Town_Of_Empire_Helper.Entities
+namespace Town_Of_Empire_Helper.Models.Entities
 {
     public class Role
     {

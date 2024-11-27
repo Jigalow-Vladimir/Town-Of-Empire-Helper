@@ -1,4 +1,4 @@
-﻿namespace Town_Of_Empire_Helper.Entities.RoleInfo
+﻿namespace Town_Of_Empire_Helper.Models.Entities.RoleInfo
 {
     public class Target
     {

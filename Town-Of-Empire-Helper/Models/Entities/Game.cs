@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Town_Of_Empire_Helper.Entities
+namespace Town_Of_Empire_Helper.Models.Entities
 {
     public class Game
     {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
-using Town_Of_Empire_Helper.Entities;
-using Town_Of_Empire_Helper.Roles;
+using Town_Of_Empire_Helper.Models.Entities;
+using Town_Of_Empire_Helper.Models.Roles;
 using Town_Of_Empire_Helper.ViewModels.Commands;
 
 namespace Town_Of_Empire_Helper.ViewModels

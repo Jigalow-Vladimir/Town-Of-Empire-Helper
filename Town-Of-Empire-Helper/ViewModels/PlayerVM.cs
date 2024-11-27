@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Town_Of_Empire_Helper.Entities;
+using Town_Of_Empire_Helper.Models.Entities;
 using Town_Of_Empire_Helper.ViewModels.ActVMs;
 
 namespace Town_Of_Empire_Helper.ViewModels

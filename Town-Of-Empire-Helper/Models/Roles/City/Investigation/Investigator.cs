@@ -1,0 +1,38 @@
+﻿using Town_Of_Empire_Helper.Models.Entities;
+using Town_Of_Empire_Helper.Models.Entities.RoleInfo;
+
+namespace Town_Of_Empire_Helper.Models.Roles
+{
+    public class Investigator : Role
+    {
+        private Dictionary<Role, int> _targets = [];
+
+        public Investigator()
+        {
+            RoleConfigurationHandler.Configurate("следователь", this);
+            RegisterAct(Steps.Other, "проверить", Logic, [new()]);
+        }
+
+        private string Logic(List<Target> targets)
+        {
+            string result = string.Empty;
+            var tg = targets[0].Role;
+            if (tg == null)
+                return string.Empty;
+
+            if (!_targets.ContainsKey(tg))
+            {
+                _targets.Add(tg, Time.Day);
+                result = tg.OtherStats["группа ролей"]
+                    .Get() ?? string.Empty;
+            }
+            else if (Time.Day - _targets[tg] > 1)
+            {
+                _targets[tg] = Time.Day;
+                result = tg.Name;
+            }
+            
+            return string.Empty;
+        }
+    }
+}
