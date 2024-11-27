@@ -13,6 +13,14 @@ namespace Town_Of_Empire_Helper.Models.Roles
             RegisterAct(Steps.Other, "проверить", Logic, [new()]);
         }
 
+        public override void Update()
+        {
+            base.Update();
+
+            Acts[Steps.Other].Targets[0].Role = null;
+            Acts[Steps.Other].IsReady = null;
+        }
+
         private string Logic(List<Target> targets)
         {
             string result = string.Empty;
