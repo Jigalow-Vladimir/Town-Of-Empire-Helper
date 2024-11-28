@@ -5,7 +5,8 @@ namespace Town_Of_Empire_Helper.Models.Roles
 {
     public class Vigilante : Role
     {
-        private int? suicideDay;
+        private int? _suicideDay = null;
+        private int _bullets = 3;
 
         public Vigilante()
         {
@@ -25,20 +26,21 @@ namespace Town_Of_Empire_Helper.Models.Roles
         {
             var tg = targets[0].Role;
 
-            if (suicideDay == Time.Day)
+            if (_suicideDay == Time.Day)
                 Statuses[StatusType.Killed].Activate(this, null);
 
-            if (tg == null)
+            if (tg == null || _bullets <= 0)
                 return string.Empty;
 
             if (tg.Statuses[StatusType.InPrison].IsActivated)
                 return "цель вне зоны доступа";
 
+            _bullets--;
             if (Stats["атака"].Get() > tg.Stats["защита"].Get())
             {
                 tg.Statuses[StatusType.Killed].Activate(this, null);
                 if (tg.OtherStats["команда"].Get() == "город")
-                    suicideDay = Time.Day + 1;
+                    _suicideDay = Time.Day + 1;
             }
             else return "защита цели слишком высока";
 

@@ -5,7 +5,8 @@ namespace Town_Of_Empire_Helper.Models.Roles
 {
     public class Jailer : Role
     {
-        private Role? _prisoner;
+        private Role? _prisoner = null;
+        private bool _doMistake = false;
 
         public Jailer()
         {
@@ -41,7 +42,7 @@ namespace Town_Of_Empire_Helper.Models.Roles
 
         private string Logic2(List<Target> targets)
         {
-            if (_prisoner == null) 
+            if (_prisoner == null || _doMistake) 
                 return string.Empty;
 
             if (_prisoner.Stats["защита"].Get() < Stats["атака"].Get())
