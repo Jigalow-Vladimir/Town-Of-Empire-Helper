@@ -1,6 +1,6 @@
 ﻿using Town_Of_Empire_Helper.Models.Entities.RoleInfo;
-using Town_Of_Empire_Helper.Models.Entities;
 using System.ComponentModel;
+using Town_Of_Empire_Helper.Models;
 
 namespace Town_Of_Empire_Helper.ViewModels.ActVMs
 {

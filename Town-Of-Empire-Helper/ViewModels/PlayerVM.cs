@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Town_Of_Empire_Helper.Models;
 using Town_Of_Empire_Helper.Models.Entities;
 using Town_Of_Empire_Helper.ViewModels.ActVMs;
 
@@ -9,19 +10,19 @@ namespace Town_Of_Empire_Helper.ViewModels
     {
         private Game _game;
         private Role _role;
-        private ObservableCollection<TargetlessActVM> targetlessActs = [];
-        private ObservableCollection<TargetOrientedActVM> targetOrientedActs = [];
-        private ObservableCollection<OneTargetOrientedActVM> oneTargetOrientedActs = [];
+        private ObservableCollection<TargetlessActVM> _targetlessActs = [];
+        private ObservableCollection<TargetOrientedActVM> _targetOrientedActs = [];
+        private ObservableCollection<OneTargetOrientedActVM> _oneTargetOrientedActs = [];
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public ObservableCollection<TargetOrientedActVM> TargetOrientedActs => 
-            targetOrientedActs;
+            _targetOrientedActs;
 
         public ObservableCollection<TargetlessActVM> TargetlessActs => 
-            targetlessActs;
+            _targetlessActs;
 
         public ObservableCollection<OneTargetOrientedActVM> OneTargetOrientedActs =>
-            oneTargetOrientedActs;
+            _oneTargetOrientedActs;
 
         public string Number =>
             _role.User.Number.ToString("00");
@@ -49,7 +50,7 @@ namespace Town_Of_Empire_Helper.ViewModels
                 .Where(act => act.Value.Targets.Count > 1 && 
                 act.Value.IsReady == null))
             {
-                targetOrientedActs.Add(new (_game, act.Value));
+                _targetOrientedActs.Add(new (_game, act.Value));
             };
         }
 
@@ -59,7 +60,7 @@ namespace Town_Of_Empire_Helper.ViewModels
                 .Where(act => act.Value.Targets.Count == 0 &&
                     act.Value.IsReady != null))
             {
-                targetlessActs.Add(new(_game, act.Value));
+                _targetlessActs.Add(new(_game, act.Value));
             }
         }
 
@@ -69,7 +70,7 @@ namespace Town_Of_Empire_Helper.ViewModels
                 .Where(act => act.Value.Targets.Count == 1 && 
                 act.Value.IsReady == null))
             {
-                oneTargetOrientedActs.Add(new(_game, act.Value));
+                _oneTargetOrientedActs.Add(new(_game, act.Value));
             }
         }
 
