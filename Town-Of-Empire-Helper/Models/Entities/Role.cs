@@ -5,7 +5,7 @@ namespace Town_Of_Empire_Helper.Models.Entities
     public class Role
     {
         public string Name { get; set; }
-        public GameTime Time { get; set; }
+        public int CurrentDay { get; set; }
         public User User { get; set; }
         public List<Role> Guests { get; set; }
         public Dictionary<string, Stat<int>> Stats { get; set; }
@@ -17,7 +17,7 @@ namespace Town_Of_Empire_Helper.Models.Entities
         {
             Name = string.Empty;
             User = new ();
-            Time = new (0, 0);
+            CurrentDay = 0;
             Guests = [];
             Stats = [];
             OtherStats = [];
@@ -27,14 +27,14 @@ namespace Town_Of_Empire_Helper.Models.Entities
 
         public virtual void Update()
         {
-            Time.Day++;
+            CurrentDay++;
 
             foreach (var stat in Stats)
-                stat.Value.Update(Time);
+                stat.Value.Update(CurrentDay);
             foreach (var stat in OtherStats)
-                stat.Value.Update(Time);
+                stat.Value.Update(CurrentDay);
             foreach (var status in Statuses)
-                status.Value.Update(Time);
+                status.Value.Update(CurrentDay);
             foreach (var act in Acts)
                 act.Value.Update();
         }

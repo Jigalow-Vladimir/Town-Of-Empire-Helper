@@ -34,8 +34,9 @@ namespace Town_Of_Empire_Helper.Models.Roles
 
             if (_prisoner == null) return string.Empty;
 
-            _prisoner.Statuses[StatusType.InPrison]
-                .Activate(this, new GameTime(Time.Day + 1, Steps.Start));
+            _prisoner.Statuses[StatusType.InPrison].Activate(
+                activator: this, 
+                endDay: CurrentDay + 1);
 
             return string.Empty;
         }
@@ -46,7 +47,9 @@ namespace Town_Of_Empire_Helper.Models.Roles
                 return string.Empty;
 
             if (_prisoner.Stats["защита"].Get() < Stats["атака"].Get())
-                _prisoner.Statuses[StatusType.Killed].Activate(this, null);
+                _prisoner.Statuses[StatusType.Killed].Activate(
+                    activator: this, 
+                    endDay: null);
 
             return string.Empty;
         }
@@ -60,7 +63,9 @@ namespace Town_Of_Empire_Helper.Models.Roles
                 !_prisoner.Statuses[StatusType.Killed].IsActivated &&
                 (Stats["защита"].Get() < _prisoner.Stats["атака"].Get()))
             {
-                Statuses[StatusType.Killed].Activate(_prisoner, null);
+                Statuses[StatusType.Killed].Activate(
+                    activator: _prisoner, 
+                    endDay: null);
                 return "вы услышали какой-то хруст";
             }
 

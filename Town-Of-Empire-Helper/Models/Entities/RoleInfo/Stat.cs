@@ -5,8 +5,8 @@
         public string Name { get; set; }
         public List<PriorityItem<T>> Infos { get; set; }
 
-        public Stat(string name, T value, Priority priority, GameTime? endTime) =>
-            (Name, Infos) = (name, [new PriorityItem<T>(value, priority, endTime)]);
+        public Stat(string name, T value, Priority priority, int? endDay) =>
+            (Name, Infos) = (name, [new PriorityItem<T>(value, priority, endDay)]);
 
         public T? Get()
         {
@@ -14,10 +14,10 @@
             return info != null ? info.Value : default;
         }
 
-        public void Add(T value, Priority priority, GameTime? endTime) =>
-            Infos.Add(new PriorityItem<T>(value, priority, endTime));
+        public void Add(T value, Priority priority, int? endDay) =>
+            Infos.Add(new PriorityItem<T>(value, priority, endDay));
 
-        public void Update(GameTime time) =>
-            Infos.RemoveAll(i => i.EndTime != null && i.EndTime.Equals(time));
+        public void Update(int day) =>
+            Infos.RemoveAll(i => i.EndDay != null && i.EndDay.Equals(day));
     }
 }

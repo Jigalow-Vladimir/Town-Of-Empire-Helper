@@ -30,13 +30,13 @@ namespace Town_Of_Empire_Helper.Models.Roles
 
             if (!_targets.ContainsKey(tg))
             {
-                _targets.Add(tg, Time.Day);
+                _targets.Add(tg, CurrentDay);
                 result = tg.OtherStats["группа ролей"]
                     .Get() ?? string.Empty;
             }
-            else if (Time.Day - _targets[tg] > 1)
+            else if (CurrentDay - _targets[tg] > 1)
             {
-                _targets[tg] = Time.Day;
+                _targets[tg] = CurrentDay;
                 result = tg.Name;
             }
             

@@ -2,28 +2,33 @@
 {
     public class Status
     {
-        public StatusType Type { get; set; }
+        public int? endDay { get; set; }
         public bool IsActivated { get; set; }
+        public StatusType Type { get; set; }
         public List<Role> IsActivatedBy { get; set; }
-        public GameTime? DeactivateTime { get; set; }
 
         public Status(StatusType type) =>
             (Type, IsActivated, IsActivatedBy) = (type, false, []);
 
-        public void Activate(Role activator, GameTime? endTime)
+        public void Activate(Role activator, int? endDay)
         {
             IsActivated = true;
             IsActivatedBy.Add(activator);
-            DeactivateTime = endTime;
+            this.endDay = endDay;
         }
 
-        public void Update(GameTime gameTime)
+        public void Deactivate()
         {
-            if (DeactivateTime != null && DeactivateTime.Equals(gameTime))
+            endDay = null;
+            IsActivated = false;
+            IsActivatedBy.Clear();
+        }
+
+        public void Update(int day)
+        {
+            if (endDay != null && endDay == day)
             {
-                DeactivateTime = null;
-                IsActivated = false;
-                IsActivatedBy.Clear();
+                Deactivate();
             }
         }
     }

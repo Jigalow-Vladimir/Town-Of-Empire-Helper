@@ -26,8 +26,15 @@ namespace Town_Of_Empire_Helper.Models.Roles
             if (_bullets <= 0)
                 return string.Empty;
 
-            Stats["атака"].Add(2, Priority.Medium, new(Time.Day + 1, Steps.Start));
-            Stats["защита"].Add(1, Priority.Medium, new(Time.Day + 1, Steps.Start));
+            Stats["атака"].Add(
+                value: 2, 
+                priority: Priority.Medium, 
+                endDay: CurrentDay + 1);
+
+            Stats["защита"].Add(
+                value: 1, 
+                priority: Priority.Medium, 
+                endDay: CurrentDay + 1);
 
             return string.Empty;
         }
@@ -41,7 +48,9 @@ namespace Town_Of_Empire_Helper.Models.Roles
             foreach (var guest in Guests)
             {
                 if (Stats["атака"].Get() > guest.Stats["защита"].Get())
-                    guest.Statuses[StatusType.Killed].Activate(this, null);
+                    guest.Statuses[StatusType.Killed].Activate(
+                        activator: this, 
+                        endDay: null);
             }
             return string.Empty;
         }

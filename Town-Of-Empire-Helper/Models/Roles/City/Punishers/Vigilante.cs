@@ -26,8 +26,10 @@ namespace Town_Of_Empire_Helper.Models.Roles
         {
             var tg = targets[0].Role;
 
-            if (_suicideDay == Time.Day)
-                Statuses[StatusType.Killed].Activate(this, null);
+            if (_suicideDay == CurrentDay + 1)
+                Statuses[StatusType.Killed].Activate(
+                    activator: this, 
+                    endDay: null);
 
             if (tg == null || _bullets <= 0)
                 return string.Empty;
@@ -38,9 +40,12 @@ namespace Town_Of_Empire_Helper.Models.Roles
             _bullets--;
             if (Stats["атака"].Get() > tg.Stats["защита"].Get())
             {
-                tg.Statuses[StatusType.Killed].Activate(this, null);
+                tg.Statuses[StatusType.Killed].Activate(
+                    activator: this, 
+                    endDay: null);
+
                 if (tg.OtherStats["команда"].Get() == "город")
-                    _suicideDay = Time.Day + 1;
+                    _suicideDay = CurrentDay + 1;
             }
             else return "защита цели слишком высока";
 

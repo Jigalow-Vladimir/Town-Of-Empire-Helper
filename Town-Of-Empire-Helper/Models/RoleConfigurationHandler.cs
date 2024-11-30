@@ -88,7 +88,7 @@ namespace Town_Of_Empire_Helper
                         name: otherStat.Key,
                         value: contains ? otherStat.Value[name] : "-",
                         priority: 0,
-                        endTime: null));
+                        endDay: null));
             }
         }
 
@@ -103,7 +103,7 @@ namespace Town_Of_Empire_Helper
                         name: stat.Key,
                         value: contains ? stat.Value[name] : 0,
                         priority: 0,
-                        endTime: null));
+                        endDay: null));
             }
         }
 

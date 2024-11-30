@@ -36,7 +36,7 @@ namespace Town_Of_Empire_Helper.Models.Roles
                 return "цель вне зоны доступа";
 
             tg.Statuses[StatusType.Blocked]
-                .Activate(this, new GameTime(Time.Day + 1, Steps.Start));
+                .Activate(this, CurrentDay + 1);
 
             foreach (var act in tg.Acts)
                 act.Value.IsReady = false;

@@ -4,9 +4,9 @@
     {
         public T? Value { get; set; }
         public Priority Priority { get; set; }
-        public GameTime? EndTime { get; set; }
+        public int? EndDay { get; set; }
 
-        public PriorityItem(T? value, Priority priority, GameTime? endTime) =>
-            (Value, Priority, EndTime) = (value, priority, endTime);
+        public PriorityItem(T? value, Priority priority, int? endTime) =>
+            (Value, Priority, EndDay) = (value, priority, endTime);
     }
 }
