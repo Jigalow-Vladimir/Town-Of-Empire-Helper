@@ -26,6 +26,9 @@ namespace Town_Of_Empire_Helper.Models.Roles
             if (tg == null) 
                 return string.Empty;
 
+            if (tg.Statuses[StatusType.InPrison].IsActivated)
+                return "цель вне зоны доступа";
+
             var result = "Посетители:\n";
             if (targets.Count <= 3) 
                 foreach (var guest in tg.Guests)

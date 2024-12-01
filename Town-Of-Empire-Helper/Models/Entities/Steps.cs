@@ -3,7 +3,8 @@
     public enum Steps
     {
         Start,
-        TargetRedefine,
+        TargetRedefine1,
+        TargetRedefine2,
         Baffs,
         Other,
         Kills,

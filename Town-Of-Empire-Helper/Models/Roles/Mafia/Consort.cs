@@ -13,15 +13,15 @@ namespace Town_Of_Empire_Helper.Models.Roles
         public Consort()
         {
             RoleConfigurationHandler.Configurate("консорт", this);
-            RegisterAct(Steps.TargetRedefine, "трахнуть", Logic, [new()]);
+            RegisterAct(Steps.TargetRedefine2, "трахнуть", Logic, [new()]);
         }
 
         public override void Update()
         {
             base.Update();
 
-            Acts[Steps.TargetRedefine].IsReady = null;
-            Acts[Steps.TargetRedefine].Targets[0].Role = null;
+            Acts[Steps.TargetRedefine2].IsReady = null;
+            Acts[Steps.TargetRedefine2].Targets[0].Role = null;
         }
 
         private string Logic(List<Target> targets)

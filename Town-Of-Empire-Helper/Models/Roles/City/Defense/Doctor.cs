@@ -10,7 +10,15 @@ namespace Town_Of_Empire_Helper.Models.Roles.City.Defense
         public Doctor()
         {
             RoleConfigurationHandler.Configurate("доктор", this);
-            
+            RegisterAct(Steps.Baffs, "лечить", Logic, [new()]);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            Acts[Steps.Baffs].Targets[0].Role = null;
+            Acts[Steps.Baffs].IsReady = null;
         }
 
         // Healing logic
@@ -21,6 +29,9 @@ namespace Town_Of_Empire_Helper.Models.Roles.City.Defense
             // A Doctor can`t heal himself twice
             if (tg == null || _healedHimself)
                 return string.Empty;
+
+            if (tg.Statuses[StatusType.InPrison].IsActivated)
+                return "цель вне зоны доступа";
 
             tg.Stats["защита"].Add(
                 value: 2,
