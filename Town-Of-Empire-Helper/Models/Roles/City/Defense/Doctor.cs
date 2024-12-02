@@ -1,7 +1,7 @@
 ﻿using Town_Of_Empire_Helper.Models.Entities;
 using Town_Of_Empire_Helper.Models.Entities.RoleInfo;
 
-namespace Town_Of_Empire_Helper.Models.Roles.City.Defense
+namespace Town_Of_Empire_Helper.Models.Roles
 {
     public class Doctor : Role 
     {

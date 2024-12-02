@@ -51,12 +51,17 @@ namespace Town_Of_Empire_Helper.ViewModels
                     new Patrol(),
                     new Pathfinder(),
                     new Sheriff(),
+                    new Investigator(),
                     
                     new Bodyguard(),
+                    new Doctor(),
                     
                     new Jailer(),
+                    new Vigilante(),
+                    new Veteran(),
 
                     new Escort(),
+                    new Carrier(),
 
                     new Consort(),
 
