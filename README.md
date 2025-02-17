@@ -1,4 +1,0 @@
-# Town-Of-Empire-Helper
-#
-#
-# ---
